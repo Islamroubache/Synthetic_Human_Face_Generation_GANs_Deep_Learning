@@ -250,14 +250,23 @@ streamlit run prediction.py
 ---
 
 ## 👨‍💻 Author
-
 <div align="center">
 
-### **Islam Roubache**
+<table>
+<tr>
+<td align="center">
+<img src="https://github.com/Islamroubache.png" width="100px;" alt="Islam Roubache"/><br>
+<sub><b>Islam Roubache</b></sub><br>
+🎓 Master's Student in AI & Data Science<br>
+📍 Higher School of Computer Science 08 May 1945<br>
+Sidi Bel Abbes, Algeria
+</td>
+</tr>
+</table>
 
-🎓 Master's Student in Artificial Intelligence & Data Science  
-🏛️ Higher School of Computer Science 08 May 1945  
-📍 Sidi Bel Abbes, Algeria
+</div>
+<div align="center">
+
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/yourprofile)
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yourusername)
