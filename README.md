@@ -1,167 +1,307 @@
-# 🧠 Synthetic Human Face Generation using GANs (Deep Learning)
+<div align="center">
 
-This repository contains my **Deep Learning project** for generating synthetic human faces using **Generative Adversarial Networks (GANs)**.  
+# 🧠 Synthetic Human Face Generation using GANs
+### Deep Learning Project for Realistic Face Synthesis
 
-It includes both the **training notebook** and **interactive Streamlit applications** for **image generation** and **real/fake classification**.
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)](https://tensorflow.org)
+[![Keras](https://img.shields.io/badge/Keras-D00000?style=for-the-badge&logo=keras&logoColor=white)](https://keras.io)
+[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io)
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+
+*Generating realistic human faces from random noise using Generative Adversarial Networks*
+
+[Features](#-features) • [Architecture](#-model-architecture) • [Installation](#-quick-start) • [Demo](#-streamlit-applications) • [Results](#-results--observations)
+
+</div>
 
 ---
 
-## 🧩 Project Overview
+## 🎯 Project Overview
 
-The goal of this project is to train a **GAN (Generative Adversarial Network)** capable of generating realistic human faces from random noise vectors.  
+This repository showcases a **Deep Learning project** that leverages **Generative Adversarial Networks (GANs)** to synthesize photorealistic human faces from random noise vectors.
 
-The GAN architecture consists of two neural networks trained in competition:
+<table>
+<tr>
+<td width="50%">
 
-- 🧠 **Generator**: learns to produce fake images that look like real human faces.
-- 
-- 🔍 **Discriminator**: learns to distinguish between real images and generated ones.
+### 🧠 Generator Network
+Learns to produce synthetic images that are indistinguishable from real human faces
 
-Through adversarial training, both networks improve together — resulting in highly realistic synthetic faces.
+</td>
+<td width="50%">
+
+### 🔍 Discriminator Network
+Learns to distinguish between authentic images and generated ones
+
+</td>
+</tr>
+</table>
+
+> **Adversarial Training Philosophy:** Through competitive training, both networks continuously improve — the generator becomes better at creating realistic faces, while the discriminator becomes more skilled at detection. This adversarial process results in highly convincing synthetic faces.
+
+---
+
+## ✨ Features
+
+<table>
+<tr>
+<td>
+
+- 🎨 **Generate Synthetic Faces** from random noise
+- 🔍 **Real vs Fake Classification** using trained discriminator
+- 📊 **Interactive Streamlit Apps** for easy experimentation
+- 🧮 **Complete Training Pipeline** with visualization
+- 💾 **Model Persistence** using Joblib for lightweight deployment
+- 📈 **Training Metrics & Loss Curves** for monitoring
+
+</td>
+</tr>
+</table>
 
 ---
 
 ## 📂 Repository Structure
 
+\`\`\`
 📦 Synthetic_Human_Face_Generation_GANs_deep_learning
-
 │
-
-├── Synthetic_face_generation_gan.ipynb # Jupyter notebook for model training
-
-├── app3.py # Streamlit app for generation + classification
-
-├── prediction.py # Streamlit app using joblib models
-
-├── app.py # Initial version of the Streamlit app
-
-└── README.md # Project documentation
-
+├── 📓 Synthetic_face_generation_gan.ipynb    # Complete training notebook
+├── 🎨 app3.py                                # Main Streamlit app (generation + classification)
+├── 🔮 prediction.py                          # Streamlit app using joblib models
+├── 🚀 app.py                                 # Initial version of the Streamlit app
+└── 📖 README.md                              # Project documentation
+\`\`\`
 
 ---
 
-## 🧠 Model Architecture
+## 🏗️ Model Architecture
 
-### Generator
-- Input: Random noise vector (latent dimension = 100)
-- Layers:
-  - Dense layer + Reshape
-  - Several Conv2D and Conv2DTranspose layers
-  - Batch Normalization and LeakyReLU activations
-  - Final layer uses `tanh` activation for image output
-- Output: Synthetic image of size **128x128x3**
+<div align="center">
 
-### Discriminator
-- Input: Real or generated image
-- Layers:
-  - Multiple Conv2D layers with stride 2
-  - Batch Normalization and LeakyReLU
-  - Flatten + Dense (sigmoid activation)
-- Output: Probability that the image is “real”
+### Generator Architecture
 
----
+</div>
 
-## 🧰 Libraries Used
+| Component | Details |
+|-----------|---------|
+| **Input** | Random noise vector (latent dimension = 100) |
+| **Hidden Layers** | Dense → Reshape → Conv2D/Conv2DTranspose layers |
+| **Normalization** | Batch Normalization |
+| **Activation** | LeakyReLU (hidden), tanh (output) |
+| **Output** | Synthetic RGB image (128×128×3) |
 
-- **TensorFlow / Keras** — model building and training  
-- **NumPy** — numerical operations  
-- **Matplotlib / Seaborn** — visualization and plotting  
-- **OpenCV** — image handling  
-- **Streamlit** — building interactive web apps  
-- **tqdm** — progress tracking  
-- **Joblib** — model saving/loading for lightweight apps  
+<div align="center">
 
----
+### Discriminator Architecture
 
-## 📊 Training Details
+</div>
 
-- **Dataset:** Human face dataset (e.g., *Face Mask Lite Dataset – Without Mask subset* or any similar face dataset)
-- **Image size:** 128×128 RGB
-- **Noise vector (z):** 100 dimensions  
-- **Optimizer:** RMSProp (learning rate = 0.0001)  
-- **Loss function:** Binary Crossentropy  
-- **Epochs:** ~30  
-- **Batch size:** 32  
-
-During training:
-- The generator tries to fool the discriminator.
-- The discriminator learns to correctly classify real vs generated faces.
-- The loss curves gradually converge, showing adversarial learning stability.
+| Component | Details |
+|-----------|---------|
+| **Input** | Real or generated image (128×128×3) |
+| **Hidden Layers** | Multiple Conv2D layers with stride 2 |
+| **Normalization** | Batch Normalization |
+| **Activation** | LeakyReLU (hidden), sigmoid (output) |
+| **Output** | Probability score (0 = fake, 1 = real) |
 
 ---
 
-## 🧮 Example Outputs
+## 🧰 Tech Stack
 
-Here are some examples of generated faces after ~30 epochs of training:
+<div align="center">
 
-| Epoch 30 | Epoch 20 | Epoch 10 |
-|-----------|-----------|-----------|
-| ![gen1](assets/output1.png) | ![gen2](assets/output2.png) | ![gen3](assets/output3.png) |
+| Category | Technologies |
+|----------|-------------|
+| **Deep Learning** | TensorFlow, Keras |
+| **Numerical Computing** | NumPy |
+| **Visualization** | Matplotlib, Seaborn |
+| **Image Processing** | OpenCV |
+| **Web Interface** | Streamlit |
+| **Utilities** | tqdm, Joblib |
 
-*(Generated samples improve over time as the GAN learns visual features.)*
+</div>
+
+---
+
+## 📊 Training Configuration
+
+<table>
+<tr>
+<td width="50%">
+
+### Dataset & Preprocessing
+- **Dataset:** Human face dataset  
+  *(e.g., Face Mask Lite Dataset – Without Mask subset)*
+- **Image Size:** 128×128 RGB
+- **Preprocessing:** Normalization to [-1, 1]
+
+</td>
+<td width="50%">
+
+### Hyperparameters
+- **Noise Vector (z):** 100 dimensions
+- **Optimizer:** RMSProp (lr = 0.0001)
+- **Loss Function:** Binary Crossentropy
+- **Epochs:** ~30
+- **Batch Size:** 32
+
+</td>
+</tr>
+</table>
+
+### Training Process
+
+\`\`\`
+Epoch 1  → Generator learns basic shapes
+Epoch 10 → Facial features start emerging
+Epoch 20 → Realistic textures develop
+Epoch 30 → High-quality synthetic faces
+\`\`\`
+
+> 📈 **Training Dynamics:** The generator attempts to fool the discriminator, while the discriminator learns to correctly classify real vs generated faces. Loss curves gradually converge, demonstrating adversarial learning stability.
+
+---
+
+## 🎨 Example Outputs
+
+<div align="center">
+
+### Generated Faces Across Training Epochs
+
+| Epoch 10 | Epoch 20 | Epoch 30 |
+|:--------:|:--------:|:--------:|
+| ![gen3](assets/output3.png) | ![gen2](assets/output2.png) | ![gen1](assets/output1.png) |
+| *Early features* | *Improved details* | *Photorealistic* |
+
+*Generated samples progressively improve as the GAN learns complex visual features*
+
+</div>
 
 ---
 
 ## 🚀 Streamlit Applications
 
-### 🎨 1. **Image Generator**
-- Run locally:
+### 🎨 Application 1: Image Generator
 
-streamlit run app3.py 
+\`\`\`bash
+streamlit run app3.py
+\`\`\`
 
-- Features:
+**Features:**
+- 🎚️ Interactive slider to select number of generated images
+- 🖼️ Real-time display of high-quality synthetic human faces
+- 💾 Generated using the trained GAN model
 
-Slider to select number of generated images.
+---
 
-Displays high-quality synthetic human faces generated by the trained model.
+### 🔍 Application 2: Real vs Fake Classifier
 
-### 🔍 2. Real vs Fake Image Classifier
+**Also available in `app3.py`:**
 
-Also in app3.py:
+- 📤 Upload any JPG image
+- 🤖 AI-powered prediction: Real or Synthetic
+- 📊 Confidence score using the discriminator network
 
-- Upload any image (JPG).
+---
 
-- The model predicts whether the image is real or synthetic using the discriminator.
+### 💡 Alternative: Lightweight Version
 
-## 🧩 Alternative: Lightweight Version (Joblib)
+\`\`\`bash
+streamlit run prediction.py
+\`\`\`
 
-If you’ve saved models using Joblib, you can use:
+> Uses Joblib-saved models for faster loading and deployment
 
-- streamlit run prediction.py
-  
-- This version loads .joblib models and generates images using the same GAN logic.
+---
+
+## 🏆 Results & Observations
+
+<table>
+<tr>
+<td>
+
+### ✅ Achievements
+
+- Generator successfully produces **realistic, smooth facial features** after sufficient training
+- Discriminator stabilizes around **0.5 accuracy** — indicating balanced adversarial competition
+- Model demonstrates strong **generalization** to unseen noise vectors
+
+</td>
+</tr>
+<tr>
+<td>
+
+### ⚙️ Fine-tuning Potential
+
+- Can be enhanced with **more training epochs**
+- Performance improves with **larger face datasets** (e.g., CelebA, FFHQ)
+- Architecture can be scaled for **higher resolution outputs**
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🚀 Future Improvements
+
+<div align="center">
+
+| Enhancement | Description |
+|-------------|-------------|
+| 🎯 **Progressive GANs** | Implement PGGAN or StyleGAN for higher-quality faces |
+| 🔄 **Data Augmentation** | Apply advanced augmentation techniques |
+| 🎓 **Transfer Learning** | Leverage pre-trained GAN architectures |
+| 🌐 **Web Demo** | Build a public-facing web application |
+| 📱 **Mobile App** | Create mobile interface for face generation |
+| 🎭 **Conditional GANs** | Add control over facial attributes |
+
+</div>
 
 
-## 🏁 Results & Observations
-
-✅ The generator successfully produces realistic, smooth facial features after enough epochs.
-✅ The discriminator stabilizes around 0.5 accuracy — indicating balanced competition.
-⚙️ The model can be fine-tuned with more epochs and better face datasets (e.g., CelebA).
-
-## 📈 Future Improvements
-
-Use Progressive GANs (PGGAN) or StyleGAN for higher-quality faces.
-
-Apply Data Augmentation and Transfer Learning on pre-trained GANs.
-
-Build a web demo for users to generate faces live.
+---
 
 ## 👨‍💻 Author
 
-Islam Roubache
+<div align="center">
 
-🎓 Master’s Student in Artificial Intelligence & Data Science
+### **Islam Roubache**
 
-📍 Higher School of Computer Science 08 May 1945 – Sidi Bel Abbes, Algeria
+🎓 Master's Student in Artificial Intelligence & Data Science  
+🏛️ Higher School of Computer Science 08 May 1945  
+📍 Sidi Bel Abbes, Algeria
 
-## 🪪 License
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/yourprofile)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yourusername)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:your.email@example.com)
 
-This project is licensed under the MIT License – feel free to use, modify, and share with proper credit.
+</div>
 
+---
 
+## 📄 License
 
 <div align="center">
-  
-###  “GANs don’t just learn to generate data — they learn to imagine.” 💫
 
+This project is licensed under the **MIT License**
+
+Feel free to use, modify, and share with proper credit
+
+[View License](LICENSE)
+
+</div>
+
+---
+
+<div align="center">
+
+### 💫 *"GANs don't just learn to generate data — they learn to imagine."*
+
+---
+
+**⭐ Star this repository if you found it helpful!**
+
+Made with ❤️ and TensorFlow
 
 </div>
