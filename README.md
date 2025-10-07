@@ -61,19 +61,6 @@ Learns to distinguish between authentic images and generated ones
 
 ---
 
-## 📂 Repository Structure
-
-\`\`\`
-📦 Synthetic_Human_Face_Generation_GANs_deep_learning
-│
-├── 📓 Synthetic_face_generation_gan.ipynb    # Complete training notebook
-├── 🎨 app3.py                                # Main Streamlit app (generation + classification)
-├── 🔮 prediction.py                          # Streamlit app using joblib models
-├── 🚀 app.py                                 # Initial version of the Streamlit app
-└── 📖 README.md                              # Project documentation
-\`\`\`
-
----
 
 ## 🏗️ Model Architecture
 
